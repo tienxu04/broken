@@ -115,10 +115,22 @@
 
     for (let i = 1; i <= totalTracks; i++) {
         const trackNumber = i.toString().padStart(2, '0');
+        let title;
+        
+        // --- LOGIC HIỂN THỊ MỚI ---
+        if (i === 1) {
+            // Track 1 là Intro
+            title = `${trackNumber} - Intro`;
+        } else {
+            // Các track còn lại là Chapter (bắt đầu từ Chapter 1)
+            const chapterNumber = i - 1;
+            title = `${trackNumber} - Chapter ${chapterNumber}`;
+        }
+        // --- KẾT THÚC LOGIC MỚI ---
         
         chapters.push({
             id: i,
-            title: `Track ${trackNumber}`,
+            title: title,
             // Tên file: broken01.mp3
             filename: `broken${trackNumber}.mp3` 
         });
@@ -126,8 +138,8 @@
 
     // 2. Cấu hình Media Metadata (Lock Screen)
     const ALBUM_TITLE = BOOK_TITLE;
-    const ARTIST_NAME = "Clare Leslie Hall"; // Tác giả
-    const COVER_IMAGE_URL = "cover.jpg";    // Đã xác nhận tồn tại cover.jpg
+    const ARTIST_NAME = "Clare Leslie Hall"; 
+    const COVER_IMAGE_URL = "cover.jpg";    
 
     // 3. Các phần tử DOM & State
     const audioPlayer = document.getElementById('audioPlayer');
